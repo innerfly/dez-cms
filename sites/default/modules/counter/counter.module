@@ -1,0 +1,76 @@
+<?php
+// Получаем данные о счетчиках пользователя
+function counter_count_counters() {
+  global $user;
+
+  $nodes = db_query('SELECT COUNT(nid) FROM {node} WHERE type = :s AND uid = :d',
+    array(':s' => 'counter', ':d' => $user->uid)
+  );
+
+  return (int) $nodes->fetchField();
+}
+
+
+// Приглашение создать счетчик сначала
+function counter_preprocess_page(&$vars) {
+  if ($vars['is_front'] && user_is_logged_in()) {
+    if (counter_count_counters() < 1) {
+      drupal_set_message('У вас нет активных счетчиков. Пожалуйста, <a href="/node/add/counter">добавьте счетчик</a> перед тем как вносить показания.', 'warning');
+    }
+  }
+}
+
+// ссылка "Смотреть показания" на странице счетчика
+// изменения заголовка счетчика и показания
+function counter_node_view($node, $view_mode) {
+  if ($view_mode == 'full' && node_is_page($node)) {
+
+    switch ($node->type) {
+      case "counter":
+        $node->content['view_records'] = array(
+          "#markup" => '<div class="view_records"><a href="/records-by-counter/' . $node->nid . '">Смотреть показания счетчика</a></div>',
+          "#weight" => 100
+        );
+        drupal_set_title("Счетчик " . $node->title);
+        break;
+
+      case "record":
+        drupal_set_title("Показание от " . $node->title);
+        break;
+    }
+  }
+}
+
+// имя пользователя в User menu
+function counter_preprocess_block(&$vars) {
+  global $user;
+  $block = &$vars['block'];
+
+  if ($block->module == 'system' && $block->delta == 'user-menu') {
+    if (user_is_logged_in()) {
+      $class = (in_array('moderator', $user->roles) || in_array('administrator', $user->roles)) ? 'manager' : '';
+      $block->subject = 'Привет, <span class="username ' . $class . '">' . check_plain($user->name) . '</span>';
+    }
+  }
+}
+
+/**
+ * Implements hook_user_view().
+ * Ссылки в профиле на счетчики и показания
+ */
+function counter_user_view($account, $view_mode) {
+  global $user;
+  if ((in_array('moderator', $user->roles) || in_array('administrator', $user->roles)) && ($user->uid != $account->uid)) {
+    $account->content['counters'] = array(
+      '#type' => 'user_profile_item',
+      '#markup' => '<a href="/counter-by-user/' . $account->uid . '">Счетчики пользователя</a>',
+      '#weight' => 7,
+    );
+    $account->content['records'] = array(
+      '#type' => 'user_profile_item',
+      '#markup' => '<a href="/user-records/' . $account->uid . '">Показания пользователя</a>',
+      '#weight' => 8,
+    );
+  }
+}
+

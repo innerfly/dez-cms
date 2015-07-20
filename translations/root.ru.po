@@ -1,0 +1,90 @@
+# Russian translation of drupal (7.7)
+# Copyright (c) 2011 by the Russian translation team
+# Generated from files:
+#  drupal-7.7/update.php: n/a
+#  drupal-7.7/cron.php: n/a
+#  drupal-7.7/authorize.php: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: drupal (7.7)\n"
+"POT-Creation-Date: 2011-08-26 06:08-0400\n"
+"PO-Revision-Date: 2010-12-03 03:01-0500\n"
+"Language-Team: Russian\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=((((n%10)==1)&&((n%100)!=11))?(0):(((((n%10)>=2)&&((n%10)<=4))&&(((n%100)<10)||((n%100)>=20)))?(1):2));\n"
+
+#: update.php:106
+msgid "No pending updates."
+msgstr "Нет ожидающих обновлений."
+
+#: cron.php:17
+msgid "Cron could not run because an invalid key was used."
+msgstr ""
+"Cron не может быть запушен, поскольку "
+"был использован неверный ключ."
+
+#: update.php:255
+msgid "update.php"
+msgstr "update.php"
+
+#: update.php:126
+msgid "1 pending update"
+msgid_plural "@count pending updates"
+msgstr[0] "@count ожидающее обновление"
+msgstr[1] "@count ожидающих обновления"
+msgstr[2] "@count ожидающих обновлений"
+
+#: authorize.php:44
+msgid "You are not allowed to access this page."
+msgstr "У вас нет доступа к этой странице."
+
+#: authorize.php:118
+msgid "Authorize file system changes"
+msgstr ""
+"Разрешить изменения в файловой "
+"системе"
+
+#: authorize.php:157
+msgid "It appears you have reached this page in error."
+msgstr ""
+"Похоже вы попали на эту страницу по "
+"ошибке."
+
+#: authorize.php:42
+msgid "authorize.php"
+msgstr "authorize.php"
+
+#: cron.php:21
+msgid "Cron could not run because the site is in maintenance mode."
+msgstr ""
+"Cron не может быть запущен, поскольку "
+"сайт находится в режиме технического "
+"обслуживания."
+
+#: update.php:118
+msgid ""
+"1 pending update (@number_applied to be applied, @number_incompatible "
+"skipped)"
+msgid_plural ""
+"@count pending updates (@number_applied to be applied, "
+"@number_incompatible skipped)"
+msgstr[0] ""
+"ожидающее обновление @count (будет "
+"применено @number_applied, пропущено "
+"@number_incompatible)"
+msgstr[1] ""
+"ожидающих обновления @count (будет "
+"применено @number_applied, пропущено "
+"@number_incompatible)"
+msgstr[2] ""
+"ожидающих обновлений @count (будет "
+"применено @number_applied, пропущено "
+"@number_incompatible)"
+
+#: authorize.php:149
+msgid "Next steps"
+msgstr "Следующие шаги"
+
